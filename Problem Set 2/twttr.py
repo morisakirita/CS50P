@@ -1,14 +1,15 @@
 def main():
-    twitter = input("Input: ").strip()
-    twttr(twitter)
+    twitter = input('Input: ').strip()
+    twitter = shorten(twitter)
+    print(twitter)
 
 
-def twttr(twitter):
-    vowels = ["a", "e", "i", "o", "u"]
-    for t in twitter:
-        if not t.lower() in vowels:
-            print(t, end="")
-    print()
+def shorten(word):
+    twttr = ('a', 'e', 'i', 'o', 'u')
+    for w in word:
+        if w.lower() in twttr:
+            word = word.replace(w, '')
+    return word
 
 
 if __name__ == "__main__":
