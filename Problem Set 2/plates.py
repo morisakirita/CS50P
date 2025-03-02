@@ -7,47 +7,56 @@ def main():
 
 
 def is_valid(s):
-    if starts_with_two_letters(s):
-        if is_length_valid(s):
-            if is_number_in_middle(s):
-                if not_allowed(s):
+    if is_length_valid(s):
+        if starts_with_two_letters(s):
+            if numbers_only_end(s):
+                if no_special_symbols(s):
                     return True
-    else:
-        return False
-
-
-def starts_with_two_letters(s):
-    return s[0:1].isalpha()
+    return False
 
 
 def is_length_valid(s):
     if 2 <= len(s) <= 6:
         return True
-    else:
-        return False
+    return False
 
 
-def is_number_in_middle(s):
-    plate_len = len(s)
-    middle_plate = int(plate_len / 2)
-    if s[-1].isalpha():
-        if s[middle_plate-1].startswith("0"):
-            return False
+def starts_with_two_letters(s):
+    for a in s[0:2]:
+        if a.isalpha():
+            continue
         else:
-            for i in s[middle_plate:-1]:
-                if i.isnumeric():
-                    return False
-                else:
-                    return True
-    else:
-        if s[middle_plate].startswith("0"):
             return False
+    return True
+
+
+
+def numbers_only_end(s):
+    for index, item in enumerate(s):
+        if item.isnumeric():
+            if item == '0':
+                return False
+            else:
+                for j in s[index:]:
+                    if j.isalpha():
+                        return False
+                    else:
+                        continue
         else:
-            return True
+            continue
+
+    return True
 
 
-def not_allowed(s):
-    return s.isalnum()
+def no_special_symbols(s):
+    for a in s:
+        if a.isalnum():
+            continue
+        else:
+            return False
+    else:
+        return True
 
 
-main()
+if __name__ == "__main__":
+    main()
